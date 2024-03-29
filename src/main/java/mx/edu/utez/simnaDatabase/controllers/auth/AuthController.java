@@ -1,8 +1,8 @@
 package mx.edu.utez.simnaDatabase.controllers.auth;
 
-import mx.edu.utez.firstapp.config.ApiResponse;
-import mx.edu.utez.firstapp.controllers.auth.dto.SignDto;
-import mx.edu.utez.firstapp.services.auth.AuthService;
+import mx.edu.utez.simnaDatabase.config.ApiResponse;
+import mx.edu.utez.simnaDatabase.controllers.auth.dto.SignDto;
+import mx.edu.utez.simnaDatabase.services.auth.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

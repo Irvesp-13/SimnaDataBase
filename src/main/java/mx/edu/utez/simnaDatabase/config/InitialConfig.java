@@ -34,8 +34,8 @@ public class InitialConfig implements CommandLineRunner {
 
         // Usuario existente
         Person person1 = getOrSavePerson(
-                new Person("mike", "moreno", null,
-                        LocalDate.of(1998, 1, 19), "MOVM980119HM")
+                new Person("Irving", "Espinosa", "Hernandez",
+                        LocalDate.of(2004, 6, 9), "MOVM980119HM")
         );
         User user1 = getOrSaveUser(
                 new User("admin", encoder.encode("admin"), person1)
@@ -44,8 +44,8 @@ public class InitialConfig implements CommandLineRunner {
 
         // Usuario 1
         Person person2 = getOrSavePerson(
-                new Person("abigail", "ramirez", null,
-                        LocalDate.of(1990, 1, 1), "DOEJ900101HM")
+                new Person("Alejandro", "Hernandez", "Diaz",
+                        LocalDate.of(2004, 6, 4), "DOEJ900101HM")
         );
         User user2 = getOrSaveUser(
                 new User("client", encoder.encode("client"), person2)
@@ -54,7 +54,7 @@ public class InitialConfig implements CommandLineRunner {
 
         // Usuario 2
         Person person3 = getOrSavePerson(
-                new Person("irving", "espinosa", null,
+                new Person("Antonio", "Diaz", "Garcia",
                         LocalDate.of(1992, 1, 1), "DOEJ920101HM")
         );
         User user3 = getOrSaveUser(
