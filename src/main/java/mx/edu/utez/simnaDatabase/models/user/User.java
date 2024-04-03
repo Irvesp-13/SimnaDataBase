@@ -19,7 +19,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 45, nullable = false, unique = true)
+    @Column(length = 45, nullable = false)
     private String username;
     @Column(length = 150, nullable = false)
     private String password;
@@ -36,7 +36,7 @@ public class User {
     @ManyToMany(mappedBy = "users", cascade = CascadeType.MERGE)
     private Set<Role> roles;
     @OneToOne
-    @JoinColumn(name = "person_id", unique = true)
+    @JoinColumn(name = "person_id")
     private Person person;
 
     public User(Long id, String username, String password, String avatar, Set<Role> roles) {
