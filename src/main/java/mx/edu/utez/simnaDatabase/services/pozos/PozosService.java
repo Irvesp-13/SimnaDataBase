@@ -57,6 +57,8 @@ public class PozosService {
         existingPozo.setProfundidad(pozo.getProfundidad());
         existingPozo.setCapacidadlitros(pozo.getCapacidadlitros());
         existingPozo.setPorcentajeagua(pozo.getPorcentajeagua());
+        existingPozo.setUbicacionpozo(pozo.getUbicacionpozo());
+        existingPozo.setComunidades(pozo.getComunidades());
         existingPozo.setEstatus(pozo.getEstatus());
 
         // Guardar el pozo actualizado en la base de datos

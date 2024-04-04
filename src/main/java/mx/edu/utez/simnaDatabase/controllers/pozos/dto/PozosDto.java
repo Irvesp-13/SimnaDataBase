@@ -14,14 +14,18 @@ public class PozosDto {
     private Double profundidad;
     private Double capacidadLitros;
     private Integer porcentajeAgua;
+    private Integer ubicacionPozo;
+    private Integer comunidades;
     private Boolean estatus;
 
-    public PozosDto(Long id, String nombre, Double profundidad, Double capacidadLitros, Integer porcentajeAgua, Boolean estatus) {
+    public PozosDto(Long id, String nombre, Double profundidad, Double capacidadLitros, Integer porcentajeAgua, Integer ubicacionPozo, Integer comunidades,Boolean estatus) {
         this.id = id;
         this.nombre = nombre;
         this.profundidad = profundidad;
         this.capacidadLitros = capacidadLitros;
         this.porcentajeAgua = porcentajeAgua;
+        this.ubicacionPozo = ubicacionPozo;
+        this.comunidades = comunidades;
         this.estatus = estatus;
     }
 
@@ -33,6 +37,8 @@ public class PozosDto {
                 pozo.getProfundidad(),
                 pozo.getCapacidadlitros(),
                 pozo.getPorcentajeagua(),
+                pozo.getUbicacionpozo(),
+                pozo.getComunidades(),
                 pozo.getEstatus()
         );
     }
@@ -44,6 +50,8 @@ public class PozosDto {
         pozo.setProfundidad(this.profundidad);
         pozo.setCapacidadlitros(this.capacidadLitros);
         pozo.setPorcentajeagua(this.porcentajeAgua);
+        pozo.setUbicacionpozo(this.ubicacionPozo);
+        pozo.setComunidades(this.comunidades);
         pozo.setEstatus(this.estatus);
         return pozo;
     }

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mx.edu.utez.simnaDatabase.models.comunidades.Comunidades;
 import mx.edu.utez.simnaDatabase.models.historial.Historial;
 import mx.edu.utez.simnaDatabase.models.person.Person;
 
@@ -28,16 +27,16 @@ public class Pozos {
     private Double capacidadlitros;
     @Column(nullable = false)
     private Integer porcentajeagua;
+    @Column(nullable = false)
+    private Integer ubicacionpozo;
+    @Column(nullable = false)
+    private Integer comunidades;
     @Column(columnDefinition = "BOOL DEFAULT true")
     private Boolean estatus; //Wrappers boolean
 
     @OneToMany(mappedBy = "pozo", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Historial> historial;
-
-    @OneToMany(mappedBy = "pozo", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Comunidades> comunidades;
 
     @ManyToMany(mappedBy = "pozos")
     @JsonIgnore
