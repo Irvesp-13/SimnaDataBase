@@ -14,11 +14,11 @@ public class PozosDto {
     private Double profundidad;
     private Double capacidadLitros;
     private Integer porcentajeAgua;
-    private Integer ubicacionPozo;
-    private Integer comunidades;
+    private String ubicacionPozo;
+    private String comunidades;
     private Boolean estatus;
 
-    public PozosDto(Long id, String nombre, Double profundidad, Double capacidadLitros, Integer porcentajeAgua, Integer ubicacionPozo, Integer comunidades,Boolean estatus) {
+    public PozosDto(Long id, String nombre, Double profundidad, Double capacidadLitros, Integer porcentajeAgua, String ubicacionPozo, String comunidades,Boolean estatus) {
         this.id = id;
         this.nombre = nombre;
         this.profundidad = profundidad;

@@ -28,9 +28,9 @@ public class Pozos {
     @Column(nullable = false)
     private Integer porcentajeagua;
     @Column(nullable = false)
-    private Integer ubicacionpozo;
+    private String ubicacionpozo;
     @Column(nullable = false)
-    private Integer comunidades;
+    private String comunidades;
     @Column(columnDefinition = "BOOL DEFAULT true")
     private Boolean estatus; //Wrappers boolean
 
