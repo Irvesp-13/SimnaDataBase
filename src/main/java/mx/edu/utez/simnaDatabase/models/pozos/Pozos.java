@@ -25,7 +25,7 @@ public class Pozos {
     private Double profundidad;
     @Column(nullable = false)
     private Double capacidadlitros;
-    @Column(nullable = false)
+    @Column
     private Integer porcentajeagua;
     @Column(nullable = false)
     private String ubicacionpozo;
