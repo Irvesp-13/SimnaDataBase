@@ -22,6 +22,21 @@ public class PersonController {
         return service.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse> getById(
+            @PathVariable Long id
+    ) {
+        return service.findById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse> update(
+            @PathVariable Long id,
+            @Valid @RequestBody PersonDto dto
+    ) {
+        return service.update(id, dto.toEntity());
+    }
+
     @PostMapping("/")
     public ResponseEntity<ApiResponse> register(
             @Valid @RequestBody PersonDto dto

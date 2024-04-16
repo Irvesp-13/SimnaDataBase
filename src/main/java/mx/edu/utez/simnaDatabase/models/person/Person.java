@@ -29,7 +29,7 @@ public class Person {
     private String lastname;
     @Column(columnDefinition = "DATE", nullable = false)
     @Temporal(TemporalType.DATE)
-    private LocalDate birthDate;
+    private LocalDate birthdate;
     @Column(length = 18, nullable = false, unique = true)
     private String curp;
     @Column(columnDefinition = "BOOL DEFAULT true")
@@ -46,20 +46,20 @@ public class Person {
     )
     @JsonIgnore
     private List<Pozos> pozos;
-    public Person(String name, String surname, String lastname, LocalDate birthDate, String curp) {
+    public Person(String name, String surname, String lastname, LocalDate birthdate, String curp) {
         this.name = name;
         this.surname = surname;
         this.lastname = lastname;
-        this.birthDate = birthDate;
+        this.birthdate = birthdate;
         this.curp = curp;
     }
 
-    public Person(Long id, String name, String surname, String lastname, LocalDate birthDate, String curp, User user) {
+    public Person(Long id, String name, String surname, String lastname, LocalDate birthdate, String curp, User user) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.lastname = lastname;
-        this.birthDate = birthDate;
+        this.birthdate = birthdate;
         this.curp = curp;
         this.user = user;
     }

@@ -29,11 +29,48 @@ public class PersonService {
         this.roleRepository = roleRepository;
     }
 
+
+    @Transactional(readOnly = true)
+    public ResponseEntity<ApiResponse> findById(Long id) {
+        Optional<Person> foundPerson = repository.findById(id);
+        if (foundPerson.isPresent())
+            return new ResponseEntity<>(new ApiResponse(foundPerson.get(), HttpStatus.OK), HttpStatus.OK);
+        return new ResponseEntity<>(new ApiResponse(HttpStatus.NOT_FOUND, true, "RecordNotFound"), HttpStatus.NOT_FOUND);
+    }
+
     @Transactional(readOnly = true)
     public ResponseEntity<ApiResponse> findAll() {
         return new ResponseEntity<>(
                 new ApiResponse(repository.findAll(), HttpStatus.OK),
                 HttpStatus.OK);
+    }
+
+    @Transactional(rollbackFor = {SQLException.class})
+    public ResponseEntity<ApiResponse> update(Long id, Person person) {
+        Optional<Person> foundPerson = repository.findById(id);
+        if (foundPerson.isPresent()) {
+            Person updatedPerson = foundPerson.get();
+            updatedPerson.setName(person.getName());
+            updatedPerson.setSurname(person.getSurname());
+            updatedPerson.setLastname(person.getLastname());
+            updatedPerson.setBirthdate(person.getBirthdate());
+            updatedPerson.setCurp(person.getCurp());
+            updatedPerson.setStatus(person.getStatus());
+            if (person.getUser() != null) {
+                Optional<User> foundUser = userRepository.findByUsername(person.getUser().getUsername());
+                if (foundUser.isPresent())
+                    return new ResponseEntity<>(
+                            new ApiResponse(
+                                    HttpStatus.BAD_REQUEST, true, "RecordAlreadyExist"
+                            ), HttpStatus.BAD_REQUEST);
+                updatedPerson.getUser().setUsername(person.getUser().getUsername());
+                updatedPerson.getUser().setPassword(person.getUser().getPassword());
+                updatedPerson.getUser().setAvatar(person.getUser().getAvatar());
+                updatedPerson.getUser().setRoles(person.getUser().getRoles());
+            }
+            return new ResponseEntity<>(new ApiResponse(repository.saveAndFlush(updatedPerson), HttpStatus.OK), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ApiResponse(HttpStatus.NOT_FOUND, true, "RecordNotFound"), HttpStatus.NOT_FOUND);
     }
 
     @Transactional(rollbackFor = {SQLException.class})
