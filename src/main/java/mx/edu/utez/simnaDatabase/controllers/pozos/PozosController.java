@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/pozos")
+@CrossOrigin(origins = {"*"})
 public class PozosController {
     private final PozosService pozosService;
 
