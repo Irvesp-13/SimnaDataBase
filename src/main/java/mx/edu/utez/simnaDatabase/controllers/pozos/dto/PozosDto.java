@@ -11,17 +11,15 @@ import mx.edu.utez.simnaDatabase.models.pozos.Pozos;
 public class PozosDto {
     private Long id;
     private String nombre;
-    private Double profundidad;
     private Double capacidadLitros;
     private Integer porcentajeAgua;
     private String ubicacionPozo;
     private String comunidades;
     private Boolean estatus;
 
-    public PozosDto(Long id, String nombre, Double profundidad, Double capacidadLitros, Integer porcentajeAgua, String ubicacionPozo, String comunidades,Boolean estatus) {
+    public PozosDto(Long id, String nombre, Double capacidadLitros, Integer porcentajeAgua, String ubicacionPozo, String comunidades,Boolean estatus) {
         this.id = id;
         this.nombre = nombre;
-        this.profundidad = profundidad;
         this.capacidadLitros = capacidadLitros;
         this.porcentajeAgua = porcentajeAgua;
         this.ubicacionPozo = ubicacionPozo;
@@ -34,7 +32,6 @@ public class PozosDto {
         return new PozosDto(
                 pozo.getId(),
                 pozo.getNombre(),
-                pozo.getProfundidad(),
                 pozo.getCapacidadlitros(),
                 pozo.getPorcentajeagua(),
                 pozo.getUbicacionpozo(),
@@ -47,7 +44,6 @@ public class PozosDto {
         Pozos pozo = new Pozos();
         pozo.setId(this.id);
         pozo.setNombre(this.nombre);
-        pozo.setProfundidad(this.profundidad);
         pozo.setCapacidadlitros(this.capacidadLitros);
         pozo.setPorcentajeagua(this.porcentajeAgua);
         pozo.setUbicacionpozo(this.ubicacionPozo);

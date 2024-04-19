@@ -22,8 +22,6 @@ public class Pozos {
     @Column(length = 50, nullable = false)
     private String nombre;
     @Column(nullable = false)
-    private Double profundidad;
-    @Column(nullable = false)
     private Double capacidadlitros;
     @Column
     private Integer porcentajeagua;
@@ -42,17 +40,15 @@ public class Pozos {
     @JsonIgnore
     private List<Person> personas;
 
-    public Pozos(String nombre, Double profundidad, Double capacidadlitros, Integer porcentajeagua) {
+    public Pozos(String nombre, Double capacidadlitros, Integer porcentajeagua) {
         this.nombre = nombre;
-        this.profundidad = profundidad;
         this.capacidadlitros = capacidadlitros;
         this.porcentajeagua = porcentajeagua;
     }
 
-    public Pozos(Long id, String nombre, Double profundidad, Double capacidadlitros, Integer porcentajeagua) {
+    public Pozos(Long id, String nombre, Double capacidadlitros, Integer porcentajeagua) {
         this.id = id;
         this.nombre = nombre;
-        this.profundidad = profundidad;
         this.capacidadlitros = capacidadlitros;
         this.porcentajeagua = porcentajeagua;
     }

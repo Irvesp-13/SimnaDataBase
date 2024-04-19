@@ -54,7 +54,6 @@ public class PozosService {
 
         // Actualizar los campos del pozo existente con los valores del DTO
         existingPozo.setNombre(pozo.getNombre());
-        existingPozo.setProfundidad(pozo.getProfundidad());
         existingPozo.setCapacidadlitros(pozo.getCapacidadlitros());
         existingPozo.setPorcentajeagua(pozo.getPorcentajeagua());
         existingPozo.setUbicacionpozo(pozo.getUbicacionpozo());
