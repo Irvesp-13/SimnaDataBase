@@ -5,6 +5,7 @@ import mx.edu.utez.simnaDatabase.config.ApiResponse;
 import mx.edu.utez.simnaDatabase.controllers.person.dto.PersonDto;
 import mx.edu.utez.simnaDatabase.services.person.PersonService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -42,5 +43,12 @@ public class PersonController {
             @Valid @RequestBody PersonDto dto
     ) {
         return service.save(dto.toEntity());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse> delete(
+            @PathVariable Long id
+    ) {
+        return service.delete(id);
     }
 }

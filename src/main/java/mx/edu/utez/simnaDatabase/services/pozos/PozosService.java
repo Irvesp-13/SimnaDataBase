@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import mx.edu.utez.simnaDatabase.SimnaDatabaseApplication;
 
 import java.util.Optional;
 
@@ -55,7 +56,7 @@ public class PozosService {
         // Actualizar los campos del pozo existente con los valores del DTO
         existingPozo.setNombre(pozo.getNombre());
         existingPozo.setCapacidadlitros(pozo.getCapacidadlitros());
-        existingPozo.setPorcentajeagua(pozo.getPorcentajeagua());
+        existingPozo.setPorcentajeagua(SimnaDatabaseApplication.getMensajeRecibido())   ;
         existingPozo.setUbicacionpozo(pozo.getUbicacionpozo());
         existingPozo.setComunidades(pozo.getComunidades());
         existingPozo.setEstatus(pozo.getEstatus());

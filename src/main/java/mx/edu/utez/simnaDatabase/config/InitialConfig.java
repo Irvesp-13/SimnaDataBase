@@ -1,8 +1,11 @@
 package mx.edu.utez.simnaDatabase.config;
 
 import lombok.RequiredArgsConstructor;
+import mx.edu.utez.simnaDatabase.SimnaDatabaseApplication;
 import mx.edu.utez.simnaDatabase.models.person.Person;
 import mx.edu.utez.simnaDatabase.models.person.PersonRepository;
+import mx.edu.utez.simnaDatabase.models.pozos.Pozos;
+import mx.edu.utez.simnaDatabase.models.pozos.PozosRepository;
 import mx.edu.utez.simnaDatabase.models.role.Role;
 import mx.edu.utez.simnaDatabase.models.role.RoleRepository;
 import mx.edu.utez.simnaDatabase.models.user.User;
@@ -16,6 +19,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import static mx.edu.utez.simnaDatabase.SimnaDatabaseApplication.getMensajeRecibido;
+import static mx.edu.utez.simnaDatabase.SimnaDatabaseApplication.mensajeRecibido;
+
 @Configuration
 @RequiredArgsConstructor
 public class InitialConfig implements CommandLineRunner {
@@ -23,6 +29,9 @@ public class InitialConfig implements CommandLineRunner {
     private final PersonRepository personRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
+    private final PozosRepository pozosRepository;
+    private final SimnaDatabaseApplication simnaDatabaseApplication; // Inject SimnaDatabaseApplication
+
 
 
     @Override
@@ -71,6 +80,16 @@ public class InitialConfig implements CommandLineRunner {
                 new User("user", encoder.encode("user"), person3)
         );
         saveUserRoles(user3.getId(), userRole.getId());
+
+        // Pozo 1
+        Pozos pozo1 = getOrSavePozo(
+                new Pozos(  "Pozo1", 1000.0, simnaDatabaseApplication.getMensaje(), "Zapata", "Palo", true)
+        );
+
+        // Pozo 2
+        Pozos pozo2 = getOrSavePozo(
+                new Pozos( "Pozo2", 2000.0, simnaDatabaseApplication.getMensaje(), "Zapata", "Palo", true)
+        );
     }
 
     @Transactional
@@ -83,6 +102,12 @@ public class InitialConfig implements CommandLineRunner {
     public Person getOrSavePerson(Person person) {
         Optional<Person> foundPerson = personRepository.findByCurp(person.getCurp());
         return foundPerson.orElseGet(() -> personRepository.saveAndFlush(person));
+    }
+
+    @Transactional
+    public Pozos getOrSavePozo(Pozos pozo) {
+        Optional<Pozos> foundPozo = pozosRepository.findByNombre(pozo.getNombre());
+        return foundPozo.orElseGet(() -> pozosRepository.saveAndFlush(pozo));
     }
 
     @Transactional

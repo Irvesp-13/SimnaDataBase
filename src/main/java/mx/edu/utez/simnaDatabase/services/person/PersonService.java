@@ -74,6 +74,40 @@ public class PersonService {
     }
 
     @Transactional(rollbackFor = {SQLException.class})
+    public ResponseEntity<ApiResponse> delete(Long id) {
+        Optional<Person> foundPerson = repository.findById(id);
+        if (foundPerson.isPresent()) {
+            Person person = foundPerson.get();
+            // Obtener el usuario asociado a la persona
+            User user = person.getUser();
+            if (user != null) {
+                // Poner los roles asignados al usuario como nulo
+                Set<Role> roles = user.getRoles();
+                for (Role role : roles) { // Eliminar los roles asignados al usuario
+                     // Guardar un ID 2 por defecto:
+                    Long roleId = 2L;
+                    roleRepository.deleteById(roleId);
+                    // Crear un nuevo rol con el mismo ID y nombre
+                    Role newRole = new Role();
+                    newRole.setId(roleId);
+                    newRole.setName(role.getName()); // Usar el nombre del rol eliminado como nombre del nuevo rol
+                    roleRepository.save(newRole); // Guardar el nuevo rol en la base de datos
+                }
+                // Eliminar el usuario
+                userRepository.delete(user);
+            }
+            // Eliminar la persona
+            repository.delete(person);
+            return new ResponseEntity<>(new ApiResponse(id, HttpStatus.OK), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ApiResponse(HttpStatus.NOT_FOUND, true, "RecordNotFound"), HttpStatus.NOT_FOUND);
+    }
+
+
+
+
+
+    @Transactional(rollbackFor = {SQLException.class})
     public ResponseEntity<ApiResponse> save(Person person) {
         person.setStatus(true);
         Optional<Person> foundPerson = repository.findByCurp(person.getCurp());

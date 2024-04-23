@@ -22,4 +22,11 @@ public class RoleService {
                 HttpStatus.OK
         );
     }
+
+    @Transactional(readOnly = true)
+    public ResponseEntity<ApiResponse> findByName(String name) {
+        return repository.findByName(name)
+                .map(role -> new ResponseEntity<>(new ApiResponse(role, HttpStatus.OK), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(new ApiResponse(HttpStatus.NOT_FOUND, true, "RecordNotFound"), HttpStatus.NOT_FOUND));
+    }
 }

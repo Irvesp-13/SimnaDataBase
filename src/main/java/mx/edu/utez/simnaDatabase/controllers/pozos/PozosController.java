@@ -1,5 +1,6 @@
 package mx.edu.utez.simnaDatabase.controllers.pozos;
 
+import mx.edu.utez.simnaDatabase.SimnaDatabaseApplication;
 import mx.edu.utez.simnaDatabase.controllers.pozos.dto.PozosDto;
 import mx.edu.utez.simnaDatabase.models.pozos.Pozos;
 import mx.edu.utez.simnaDatabase.services.pozos.PozosService;
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = {"*"})
 public class PozosController {
     private final PozosService pozosService;
+    private final SimnaDatabaseApplication simnaDatabaseApplication;
 
-    public PozosController(PozosService pozosService) {
+    public PozosController(PozosService pozosService, SimnaDatabaseApplication simnaDatabaseApplication) {
         this.pozosService = pozosService;
+        this.simnaDatabaseApplication = simnaDatabaseApplication;
     }
 
     @GetMapping
@@ -58,6 +61,12 @@ public class PozosController {
         // Establecer el ID del pozo a actualizar
         pozo.setId(id);
 
+        // Obtener el mensaje recibido
+        String mensajeRecibido = simnaDatabaseApplication.getMensaje();
+
+        // Actualizar el pozo con el mensaje recibido
+        pozo.setPorcentajeagua(mensajeRecibido);
+
         // Actualizar el pozo
         ResponseEntity<PozosDto> response = pozosService.update(pozo);
 
@@ -74,3 +83,4 @@ public class PozosController {
         }
     }
 }
+

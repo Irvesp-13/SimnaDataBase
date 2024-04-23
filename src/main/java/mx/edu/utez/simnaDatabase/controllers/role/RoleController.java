@@ -3,10 +3,7 @@ package mx.edu.utez.simnaDatabase.controllers.role;
 import mx.edu.utez.simnaDatabase.config.ApiResponse;
 import mx.edu.utez.simnaDatabase.services.role.RoleService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/role")
@@ -23,4 +20,11 @@ public class RoleController {
         return service.findAll();
     }
 
+    @GetMapping("/{name}")
+    public ResponseEntity<ApiResponse> getByName(
+        @PathVariable String name
+        )
+    {
+        return service.findByName(name);
+    }
 }

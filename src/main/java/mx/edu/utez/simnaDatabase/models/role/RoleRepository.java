@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
     Optional<Role> findByName(String name);
+
     @Modifying
     @Query(value = "INSERT INTO user_roles (role_id, user_id) VALUES ( :roleId, :userId ) ",
             nativeQuery = true)

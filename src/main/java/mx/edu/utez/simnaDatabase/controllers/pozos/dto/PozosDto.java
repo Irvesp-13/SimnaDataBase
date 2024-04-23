@@ -12,12 +12,12 @@ public class PozosDto {
     private Long id;
     private String nombre;
     private Double capacidadLitros;
-    private Integer porcentajeAgua;
+    private String porcentajeAgua;
     private String ubicacionPozo;
     private String comunidades;
     private Boolean estatus;
 
-    public PozosDto(Long id, String nombre, Double capacidadLitros, Integer porcentajeAgua, String ubicacionPozo, String comunidades,Boolean estatus) {
+    public PozosDto(Long id,String nombre, Double capacidadLitros, String porcentajeAgua, String ubicacionPozo, String comunidades,Boolean estatus) {;
         this.id = id;
         this.nombre = nombre;
         this.capacidadLitros = capacidadLitros;
