@@ -73,6 +73,28 @@ public class PozosController {
         return response;
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<PozosDto> updatePorc(@PathVariable Long id, @RequestBody PozosDto pozoDto) {
+        // Establecer el ID del pozo a actualizar
+        Pozos pozo = pozoDto.toEntity();
+
+
+
+        // Establecer el ID del pozo a actualizar
+        pozo.setId(id);
+
+        // Obtener el mensaje recibido
+        String mensajeRecibido = simnaDatabaseApplication.getMensaje();
+
+        // Actualizar el pozo con el mensaje recibido
+        pozo.setPorcentajeagua(mensajeRecibido);
+
+        // Actualizar el pozo
+        ResponseEntity<PozosDto> response = pozosService.updatePorc(pozo);
+
+        return response;
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePozo(@PathVariable Long id) {
         boolean deleted = pozosService.deleteById(id); // Eliminar el pozo por su ID

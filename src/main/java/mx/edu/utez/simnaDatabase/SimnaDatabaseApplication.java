@@ -10,11 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class SimnaDatabaseApplication implements MqttCallback {
 
-    private static final String MQTT_BROKER = "tcp://44.222.205.167:1883";
+    private static final String MQTT_BROKER = "tcp://100.26.131.20:1883";
     private static final String CLIENT_ID = "springboot_client";
     public static final String TOPIC_A = "agua/porcentaje_A";
     public static final String TOPIC_B = "agua/porcentaje_B";
     public static String mensajeRecibido="1";
+
+    public static String mensajeRecibido2="2";
     private MqttClient client;
 
     public static void main(String[] args) {
@@ -42,6 +44,10 @@ public class SimnaDatabaseApplication implements MqttCallback {
 
     public static String getMensajeRecibido(){
         return mensajeRecibido;
+    }
+
+    public static String getMensajeRecibido2(){
+        return mensajeRecibido2;
     }
 
     private MqttConnectOptions getMqttConnectOptions() {
@@ -83,13 +89,21 @@ public class SimnaDatabaseApplication implements MqttCallback {
     public String getMensaje(){
         return mensajeRecibido;
     }
+    public String getMensaje2() {return mensajeRecibido2;}
 
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         String mensaje = new String(message.getPayload());
-        System.out.println("Mensaje recibido en el tema: " + topic + ". Mensaje: " + mensaje);
-        mensajeRecibido=mensaje;
-        System.out.println("Mensaje almacenado en la variable mensajeRecibido: "+mensajeRecibido);
+        if (topic.equals(TOPIC_A)) {
+            mensajeRecibido = mensaje;
+            System.out.println("Mensaje almacenado en la variable mensajeRecibido1: "+mensajeRecibido);
+
+        }
+        if (topic.equals(TOPIC_B)) {
+            mensajeRecibido2 = mensaje;
+            System.out.println("Mensaje almacenado en la variable mensajeRecibido2: "+mensajeRecibido2);
+
+        }
     }
 
 

@@ -56,7 +56,7 @@ public class PozosService {
         // Actualizar los campos del pozo existente con los valores del DTO
         existingPozo.setNombre(pozo.getNombre());
         existingPozo.setCapacidadlitros(pozo.getCapacidadlitros());
-        existingPozo.setPorcentajeagua(SimnaDatabaseApplication.getMensajeRecibido())   ;
+        existingPozo.setPorcentajeagua(SimnaDatabaseApplication.getMensajeRecibido());
         existingPozo.setUbicacionpozo(pozo.getUbicacionpozo());
         existingPozo.setComunidades(pozo.getComunidades());
         existingPozo.setEstatus(pozo.getEstatus());
@@ -67,6 +67,48 @@ public class PozosService {
         // Convertir el pozo actualizado a un DTO y devolverlo en un ResponseEntity con código 200 (OK)
         return ResponseEntity.ok(PozosDto.fromPozo(updatedPozo));
     }
+
+
+
+    @Transactional
+    public ResponseEntity<PozosDto> updatePorc(Pozos pozo) {
+        Optional<Pozos> optionalPozo = repository.findById(pozo.getId());
+        if (optionalPozo.isEmpty()) {
+            // Si no se encuentra el pozo, devolver un ResponseEntity con código 404 (NOT FOUND)
+            return ResponseEntity.notFound().build();
+        }
+
+        Pozos existingPozo = optionalPozo.get();
+
+        // Actualizar los campos del pozo existente con los valores del DTO
+        existingPozo.setNombre(pozo.getNombre());
+        existingPozo.setCapacidadlitros(pozo.getCapacidadlitros());
+        if ("Pozo1".equals(existingPozo.getNombre()) || "pozo palo escrito".equals(existingPozo.getNombre()) ||
+                "pozo paseos del rio".equals(existingPozo.getNombre()) || "pozo prohogar".equals(existingPozo.getNombre()) ||
+                "pozo rezoyuca".equals(existingPozo.getNombre())) {
+            existingPozo.setPorcentajeagua(SimnaDatabaseApplication.getMensajeRecibido());
+            System.out.println("Se ha actualizado el porcentaje de agua del Pozo 1 correctamente cantidad: " + SimnaDatabaseApplication.getMensajeRecibido());
+        } else if ("Pozo2".equals(existingPozo.getNombre()) || "pozo el organo".equals(existingPozo.getNombre()) ||
+                "pozo el Capiri".equals(existingPozo.getNombre()) || "pozo calera".equals(existingPozo.getNombre()) ||
+                "pozo centro".equals(existingPozo.getNombre())) {
+            existingPozo.setPorcentajeagua(SimnaDatabaseApplication.getMensajeRecibido2());
+            System.out.println("Se ha actualizado el porcentaje de agua del Pozo 2 correctamente cantidad: " + SimnaDatabaseApplication.getMensajeRecibido2());
+        } else {
+            System.out.println("El nombre del pozo no coincide con ninguna condición.");
+            return ResponseEntity.notFound().build();
+        }
+
+        existingPozo.setUbicacionpozo(pozo.getUbicacionpozo());
+        existingPozo.setComunidades(pozo.getComunidades());
+        existingPozo.setEstatus(pozo.getEstatus());
+
+        // Guardar el pozo actualizado en la base de datos
+        Pozos updatedPozo = repository.save(existingPozo);
+
+        // Convertir el pozo actualizado a un DTO y devolverlo en un ResponseEntity con código 200 (OK)
+        return ResponseEntity.ok(PozosDto.fromPozo(updatedPozo));
+    }
+
 
     @Transactional
     public boolean deleteById(Long id) {

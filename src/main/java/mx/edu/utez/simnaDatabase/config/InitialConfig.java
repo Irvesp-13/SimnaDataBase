@@ -88,7 +88,7 @@ public class InitialConfig implements CommandLineRunner {
 
         // Pozo 2
         Pozos pozo2 = getOrSavePozo(
-                new Pozos( "Pozo2", 2000.0, simnaDatabaseApplication.getMensaje(), "Zapata", "Palo", true)
+                new Pozos( "Pozo2", 2000.0, simnaDatabaseApplication.getMensaje2(), "Zapata", "Palo", true)
         );
     }
 
